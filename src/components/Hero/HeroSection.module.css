@@ -1,0 +1,127 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 0;
+}
+
+.heroContent {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.heroLogo {
+  max-width: 340px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+  filter: drop-shadow(0 0 30px #FFB6D977);
+  animation: float-logo 2.6s ease-in-out infinite;
+}
+
+.playerCount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 28px auto;
+  background: linear-gradient(45deg, #FFB6D9, #FF69B4);
+  padding: 18px 45px;
+  border-radius: 25px;
+  font-size: 1.08rem;
+  font-weight: 700; /* bold */
+  color: #fff;
+  box-shadow: 0 4px 15px #ffb6d944;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: max-content;
+  font-family: 'Quicksand', Arial, sans-serif;
+  letter-spacing: 1.2px;
+}
+.playerCount:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px #ffb6d988;
+}
+
+.serverIpContainer {
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(20px);
+  padding: 1.3rem 3rem;
+  border-radius: 25px;
+  margin: 2.5rem 0;
+  border: 2px solid #FFB6D9;
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  font-family: 'Quicksand', Arial, sans-serif;
+}
+
+.serverIpContainer:hover {
+  background: #ffb6d940;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255,105,180,0.4);
+}
+
+.serverIp {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #FF69B4;
+  font-family: 'Quicksand', Arial, sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.copyBtn {
+  background: linear-gradient(45deg, #FF69B4, #FFB6D9);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.93rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.copyBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+}
+
+.discordBtn {
+  background: linear-gradient(135deg, #FFB6D9, #FF69B4);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.09rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 2rem;
+  font-weight: 700;
+  font-family: 'Quicksand', Arial, sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.discordBtn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255,105,180,0.4);
+}
+
+@keyframes float-logo {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-28px); }
+  100% { transform: translateY(0); }
+}

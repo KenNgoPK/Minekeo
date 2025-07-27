@@ -1,0 +1,135 @@
+.blogContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 400px;
+  padding: 40px 0;
+}
+
+.blogList {
+  width: 1100px;           /* Tăng chiều rộng list card lên 1100px */
+  max-width: 96vw;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.blogCardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blogCard {
+  display: flex;
+  flex-direction: row;
+  background: #262626;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: transform 0.15s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
+  min-height: 250px;           /* Cao hơn 1 chút cho cân đối */
+}
+
+.blogCard:hover {
+  transform: translateY(-2px) scale(1.012);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* Cover Image */
+.coverImg {
+  width: 430px;                /* Ảnh ngang rộng hơn */
+  min-width: 430px;
+  height: 250px;
+  background-color: #393939; 
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-right: 2px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 36px 18px 36px;  /* Padding ngang nhiều lên cho thoáng */
+  color: #fff;
+  gap: 12px;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffd76b;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+}
+
+.desc {
+  color: #cccccc;
+  font-size: 1.05rem;
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  min-height: 52px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b7b7b7;
+}
+
+.author img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid #393939;
+  background: #111;
+  object-fit: cover;
+}
+
+.dot {
+  font-size: 1.5em;
+  color: #888;
+  line-height: 1;
+  margin: 0 2px;
+}
+
+.readTime {
+  padding: 4px 12px;
+  background: #222;
+  border-radius: 8px;
+  font-size: 0.93em;
+  color: #e2e2e2;
+  margin-left: 12px;
+}
+
+@media (max-width: 1280px) {
+  .blogList {
+    width: 97vw;
+  }
+  .coverImg {
+    width: 300px;
+    min-width: 300px;
+    height: 180px;
+  }
+  .blogCard {
+    min-height: 180px;
+  }
+  .cardContent {
+    padding: 18px 12px 10px 16px;
+  }
+}

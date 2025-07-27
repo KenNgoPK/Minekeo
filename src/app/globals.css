@@ -1,26 +1,139 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@tailwind utilities;
 
+/* ======= Custom Fonts & Icons ======= */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded');
+
+/* ======= Root Variables ======= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --pink: #FF69B4;
+    --pink-pastel: #FFB6D9;
+    --white: #fff;
+    --cream: #FFF6F9;
+    --bg-primary: linear-gradient(120deg, #FFF6F9 70%, #FFB6D9 120%);
+    --bg-secondary: rgba(255,255,255,0.90);
+    --text-primary: #FF69B4;
+    --text-secondary: #c56ca9;
+    --accent-color: #FF69B4;
+    --card-bg: rgba(255,255,255,0.96);
+    --border-color: #FFB6D9;
+    --nav-hover: rgba(255,105,180,0.13);
+
+    --font-title: 'Quicksand', Arial, sans-serif;
+    --font-body: 'Quicksand', Arial, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ======= Google Material Symbols Rounded icon style ======= */
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25em; /* tùy chỉnh cỡ */
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+  margin-right: 0.22em; /* space với chữ */
+  color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ======= Global Body ======= */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-body);
+    background: #f0f0f0;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* ======= Sakura Effect ======= */
+#cherry-blossom {
+    position: fixed;
+    top: 0;   
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    overflow: visible;
+}
+.cherry-petal {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0.88;
+    will-change: transform, opacity;
+}
+
+/* ======= Ẩn ngôn ngữ không chọn ======= */
+[data-lang="vi"] .lang-en { display: none; }
+[data-lang="en"] .lang-vi { display: none; }
+
+/* ======= Logo Animation ======= */
+@keyframes float-logo {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-28px); }
+    100% { transform: translateY(0); }
+}
+.animate-float-logo {
+    animation: float-logo 2.6s ease-in-out infinite;
+}
+
+/* ======= Header + Hero background overlay ======= */
+.header-hero-bg {
+    background: url('/img/minecraft_pink_4k.png') center/cover no-repeat;
+    position: relative;
+    z-index: 0;
+}
+.header-hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(180, 180, 180, 0.4));
+    z-index: 0;
+}
+
+/* ======= Logo và hero giữ lại ======= */
+.logo {
+    max-width: 100px;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 10px #FFB6D944);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 5px 20px #FFB6D988);
+}
+
+.hero-logo {
+    max-width: 340px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 2rem auto;
+    filter: drop-shadow(0 0 30px #FFB6D977);
+}
+
+
+
+@media (max-width: 768px) {
+    .hero-logo { max-width: 160px; }
+    .logo { max-width: 80px; max-height: 38px; }
+    header { padding-top: 1rem; }
 }
