@@ -185,3 +185,49 @@
     min-height: 50px;
   }
 }
+/* ==== giữ style cũ của bạn ở trên, chỉ thêm/đổi phần dưới ==== */
+
+/* Gỡ rule display:none ở global chỉ trong Header
+   -> để cả EN/VI đều render cho việc đo width */
+.header .lang-en,
+.header .lang-vi {
+  display: inline-block !important;
+}
+
+/* Hộp i18n: khóa width bằng biến --i18n-w (do JS set) */
+.i18nWrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: var(--i18n-w, auto); /* LOCK width */
+  /* line-height kế thừa từ nút, nên text sẽ căn giữa theo chiều dọc */
+}
+
+/* Hai label chồng lên nhau, chiếm full box */
+.i18nWrap > span {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .18s ease;
+  pointer-events: none; /* tránh ảnh hưởng click */
+}
+
+/* Ẩn/hiện bằng visibility+opacity để KHÔNG ảnh hưởng layout */
+[data-lang="en"] .i18nWrap .lang-vi { visibility: hidden; opacity: 0; }
+[data-lang="vi"] .i18nWrap .lang-en { visibility: hidden; opacity: 0; }
+
+/* Đảm bảo nút không bẻ dòng, khung không đổi */
+.navLink, .toggleBtn { white-space: nowrap; }
+
+
+/* Dùng để đo chữ ngoài màn hình, không ảnh hưởng layout */
+.i18nMeasureProbe{
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+  visibility: hidden;
+  white-space: nowrap;
+}

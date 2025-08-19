@@ -1,32 +1,36 @@
 "use client";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+
 import Header from "@/components/Header/Header";
 import HeroSection from "@/components/Hero/HeroSection";
 import SakuraEffect from "@/components/SakuraEffect";
 import BlogSection from "@/components/BLocksection/BlogSection";
+import WaveDivider from "@/components/WaveDivider";
 
 export default function Home() {
-  // Khởi tạo state từ cookie (có kiểm tra chuỗi "true"/"false")
+  // Khởi tạo state từ cookie
   const [lang, setLang] = useState(() => Cookies.get("lang") || "vi");
   const [theme, setTheme] = useState(() => Cookies.get("theme") || "dark");
   const [sakura, setSakura] = useState(() => {
-    const sakuraCookie = Cookies.get("sakura");
-    // Nếu chưa có thì mặc định là true
-    if (sakuraCookie === undefined) return true;
-    // Trả về true/false dựa vào chuỗi lưu trong cookie
-    return sakuraCookie === "true";
+    const s = Cookies.get("sakura");
+    if (s === undefined) return true; // mặc định bật
+    return s === "true";
   });
 
+  // Sync lang
   useEffect(() => {
     Cookies.set("lang", lang, { expires: 365, path: "/" });
+    document.body.setAttribute("data-lang", lang);
   }, [lang]);
 
+  // Sync theme
   useEffect(() => {
     Cookies.set("theme", theme, { expires: 365, path: "/" });
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
 
+  // Sync sakura
   useEffect(() => {
     Cookies.set("sakura", sakura ? "true" : "false", { expires: 365, path: "/" });
   }, [sakura]);
@@ -43,9 +47,16 @@ export default function Home() {
           setSakura={setSakura}
         />
         <HeroSection />
-        <SakuraEffect enabled={sakura} />
+        {sakura && <SakuraEffect enabled={sakura} />}
+        <WaveDivider
+          fill="#f5f5f5"
+          position="bottom"
+          dropShadow={true}
+          className="wave-divider"
+        />
       </div>
-      <div style={{ background: "#f5f5f5", minHeight: "100vh" }}>
+
+      <div className="blog-section-bg">
         <BlogSection lang={lang} />
       </div>
     </div>

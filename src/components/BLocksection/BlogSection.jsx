@@ -25,14 +25,23 @@ export default function BlogSection({ lang = "vi" }) {
   const post = blogData[lang] || blogData["vi"];
 
   return (
-    <div className={styles.blogContainer}>
+    <section className={styles.blogContainer}>
+      {/* Heading */}
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>
+          <span className="lang-en">Blog</span>
+          <span className="lang-vi">Blog</span>
+        </h2>
+        <span className={styles.sectionUnderline} />
+      </div>
+
+      {/* List */}
       <div className={styles.blogList}>
         <Link href={post.link} className={styles.blogCardLink}>
           <div className={styles.blogCard}>
-            <div
-              className={styles.coverImg}
-              style={{ backgroundImage: `url(/img/minekeoLogo.png)` }}
-            />
+            <div className={styles.coverImg}>
+              <img src="/img/minekeoLogo.png" alt={post.title} />
+            </div>
             <div className={styles.cardContent}>
               <h3 className={styles.title}>{post.title}</h3>
               <p className={styles.desc}>{post.desc}</p>
@@ -49,6 +58,6 @@ export default function BlogSection({ lang = "vi" }) {
           </div>
         </Link>
       </div>
-    </div>
+    </section>
   );
 }

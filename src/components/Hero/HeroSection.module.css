@@ -23,12 +23,13 @@
   height: auto;
   display: block;
   margin: 0 auto 2rem auto;
+  transform: translateY(20px); /* dịch xuống 20px */
   filter: drop-shadow(0 0 30px #FFB6D977);
   animation: float-logo 2.6s ease-in-out infinite;
 }
 
 .playerCount {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto 28px auto;
@@ -36,7 +37,7 @@
   padding: 18px 45px;
   border-radius: 25px;
   font-size: 1.08rem;
-  font-weight: 700; /* bold */
+  font-weight: 700;
   color: #fff;
   box-shadow: 0 4px 15px #ffb6d944;
   cursor: pointer;
@@ -48,6 +49,9 @@
 .playerCount:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px #ffb6d988;
+}
+.countNumber{ /* số người chơi */
+  display: inline-block;
 }
 
 .serverIpContainer {
@@ -92,7 +96,6 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
-
 .copyBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255,105,180,0.4);
@@ -108,13 +111,13 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: 2rem;
   font-weight: 700;
   font-family: 'Quicksand', Arial, sans-serif;
   letter-spacing: 1.2px;
 }
-
 .discordBtn:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(255,105,180,0.4);
@@ -124,4 +127,47 @@
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-28px); }
   100% { transform: translateY(0); }
+}
+
+/* =========================
+   I18N — KHÓA WIDTH CHO LABEL (giống header)
+   ========================= */
+
+/* Gỡ rule global display:none trong hero — để render EN/VI cho phép đo */
+.hero .lang-en,
+.hero .lang-vi {
+  display: inline-block !important;
+}
+
+/* Hộp i18n: width KHÓA bởi --i18n-w (set bằng JS) */
+.i18nWrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: var(--i18n-w, auto);
+}
+
+/* Chồng 2 label lên nhau */
+.i18nWrap > span {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .18s ease;
+  pointer-events: none;
+}
+
+/* Ẩn/hiện bằng visibility+opacity để KHÔNG đổi layout */
+[data-lang="en"] .i18nWrap .lang-vi { visibility: hidden; opacity: 0; }
+[data-lang="vi"] .i18nWrap .lang-en { visibility: hidden; opacity: 0; }
+
+/* Probe đo chữ — ngoài màn hình */
+.i18nMeasureProbe {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+  visibility: hidden;
+  white-space: nowrap;
 }

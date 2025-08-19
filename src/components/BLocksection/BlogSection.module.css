@@ -1,17 +1,54 @@
+/* ===== Container chung cho heading + list ===== */
 .blogContainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 400px;
-  padding: 40px 0;
+  max-width: 1200px;          
+  margin: 0 auto;             
+  padding: 40px 24px;         
+  min-height: 420px;
 }
 
+/* ===== Heading ===== */
+.sectionHeader {
+  width: 100%;
+  margin: 0 0 32px 0;          /* +spacing dưới heading */
+  position: relative;
+  text-align: center;          /* canh giữa tiêu đề */
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 2.2rem;           /* to hơn một chút */
+  font-weight: 900;            /* nhấn mạnh hơn */
+  color: #111;                 /* đổi #fff nếu nền tối */
+  letter-spacing: .2px;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;       /* co theo chữ */
+  width: max-content;
+  padding-bottom: 8px;         /* chỗ cho underline */
+  transition: color .2s ease;
+}
+
+/* Underline dài đúng bằng chữ */
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;                 
+  height: 4px;
+  background: #ff69b4;
+  border-radius: 2px;
+  box-shadow: 0 1px 8px rgba(255,105,180,.35); /* glow nhẹ */
+}
+
+/* ===== List ===== */
 .blogList {
-  width: 1500px;           /* Tăng chiều rộng list card lên 1100px */
-  max-width: 96vw;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  margin: 0 auto;              /* bám theo container, giữa đẹp */
 }
 
 .blogCardLink {
@@ -19,59 +56,80 @@
   color: inherit;
 }
 
+/* ===== Card ===== */
 .blogCard {
   display: flex;
   flex-direction: row;
-  background: #262626;
-  border-radius: 18px;
+  gap: 20px;                   /* khoảng giữa ảnh & chữ */
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.15s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
-  min-height: 250px;           /* Cao hơn 1 chút cho cân đối */
+  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+  min-height: 280px;
+  border: 2px solid rgba(255, 182, 217, 0.35);
+  box-shadow: 0 4px 18px rgba(255, 182, 217, 0.25);
+  margin-left: 0;
+}
+.blogCard:hover,
+.blogCard:focus-within {
+  transform: translateY(-2px) scale(1.01);     /* lift nhẹ */
+  border-color: rgba(255, 182, 217, 0.85);
+  box-shadow: 0 12px 30px rgba(255,105,180,.28);
 }
 
-.blogCard:hover {
-  transform: translateY(-2px) scale(1.012);
-}
-
-/* Cover Image */
+/* ===== Cover image (dùng <img>) ===== */
 .coverImg {
-  width: 430px;                /* Ảnh ngang rộng hơn */
-  min-width: 430px;
-  height: 250px;
-  background-color: #393939; 
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-right: 2px solid #222;
+  width: 260px;                /* gọn bớt để cân text */
+  min-width: 260px;
+  padding: 12px;
+  background: #fff;
+  border-right: 2px solid rgba(255, 182, 217, 0.6);
+  box-shadow: 1px 0 6px rgba(255, 182, 217, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.coverImg img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
+/* ===== Content ===== */
 .cardContent {
   flex: 1;
+  padding: 28px 32px;          /* thoáng hơn một chút */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 36px 18px 36px;  /* Padding ngang nhiều lên cho thoáng */
-  color: #fff;
+  color: #444;
   gap: 12px;
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #ffd76b;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FF69B4;
   margin: 0 0 6px 0;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: 0.2px;
+  transition: color .18s ease;
+}
+.blogCard:hover .title,
+.blogCard:focus-within .title {
+  color: #ff2a93;              /* đậm hơn khi hover */
 }
 
 .desc {
-  color: #cccccc;
+  color: #4a4a4a;              /* tăng contrast (từ #666) */
   font-size: 1.05rem;
   margin: 0 0 14px 0;
-  line-height: 1.5;
+  line-height: 1.6;
   min-height: 52px;
 }
 
@@ -86,48 +144,57 @@
 .author {
   display: flex;
   align-items: center;
-  gap: 7px;
-  color: #b7b7b7;
+  gap: 8px;
+  color: #777;
 }
-
 .author img {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  border: 1.5px solid #393939;
-  background: #111;
+  border: 1.5px solid rgba(255, 182, 217, 0.4);
+  background: rgba(255,255,255,0.06);
   object-fit: cover;
 }
 
 .dot {
   font-size: 1.5em;
-  color: #888;
+  color: #aaa;
   line-height: 1;
   margin: 0 2px;
 }
 
 .readTime {
-  padding: 4px 12px;
-  background: #222;
-  border-radius: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 182, 217, 0.25);
+  border-radius: 10px;
   font-size: 0.93em;
-  color: #e2e2e2;
+  color: #FF69B4;
   margin-left: 12px;
+  font-weight: 700;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.readTime:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 182, 217, 0.32);
+  box-shadow: 0 6px 14px rgba(255,105,180,.25);
 }
 
-@media (max-width: 1280px) {
-  .blogList {
-    width: 97vw;
-  }
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .blogContainer { padding: 28px 16px; }
+  .blogCard { flex-direction: column; min-height: auto; }
   .coverImg {
-    width: 300px;
-    min-width: 300px;
-    height: 180px;
+    width: 100%;
+    min-width: 100%;
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 182, 217, 0.6);
+    box-shadow: 0 1px 6px rgba(255, 182, 217, 0.2);
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 0;
   }
-  .blogCard {
-    min-height: 180px;
-  }
-  .cardContent {
-    padding: 18px 12px 10px 16px;
-  }
+}
+
+/* Màn to muốn dài hơn chút */
+@media (min-width: 1280px) {
+  .blogContainer { max-width: 1280px; }
 }
