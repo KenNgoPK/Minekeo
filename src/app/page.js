@@ -7,14 +7,15 @@ import HeroSection from "@/components/Hero/HeroSection";
 import SakuraEffect from "@/components/SakuraEffect";
 import BlogSection from "@/components/BLocksection/BlogSection";
 import WaveDivider from "@/components/WaveDivider";
+import Footer from "@/components/Footer/Footer";   // ← footer
+import "./globals.css";
 
 export default function Home() {
   // Khởi tạo state từ cookie
   const [lang, setLang] = useState(() => Cookies.get("lang") || "vi");
-  const [theme, setTheme] = useState(() => Cookies.get("theme") || "dark");
   const [sakura, setSakura] = useState(() => {
     const s = Cookies.get("sakura");
-    if (s === undefined) return true; // mặc định bật
+    if (s === undefined) return true;
     return s === "true";
   });
 
@@ -23,12 +24,6 @@ export default function Home() {
     Cookies.set("lang", lang, { expires: 365, path: "/" });
     document.body.setAttribute("data-lang", lang);
   }, [lang]);
-
-  // Sync theme
-  useEffect(() => {
-    Cookies.set("theme", theme, { expires: 365, path: "/" });
-    document.body.setAttribute("data-theme", theme);
-  }, [theme]);
 
   // Sync sakura
   useEffect(() => {
@@ -39,8 +34,6 @@ export default function Home() {
     <div>
       <div className="header-hero-bg min-h-screen relative">
         <Header
-          theme={theme}
-          setTheme={setTheme}
           lang={lang}
           setLang={setLang}
           sakura={sakura}
@@ -59,6 +52,8 @@ export default function Home() {
       <div className="blog-section-bg">
         <BlogSection lang={lang} />
       </div>
+      <Footer />
+        
     </div>
   );
 }

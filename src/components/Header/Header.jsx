@@ -1,18 +1,25 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
-export default function Header({ theme, setTheme, lang, setLang, sakura, setSakura }) {
-  const i18nRefs = useRef([]); // giữ ref cho từng i18nWrap
+export default function Header({ lang, setLang, sakura, setSakura }) {
+  const pathname = usePathname();
+  const i18nRefs = useRef([]);
 
-  // set data-theme / data-lang cho body
+  // route active helper
+  const isActive = (href) =>
+    pathname === href ||
+    (href !== "/" && pathname?.startsWith(href + "/")) ||
+    (href === "/" && pathname === "/");
+
+  // chỉ còn sync data-lang
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
     document.body.setAttribute("data-lang", lang);
-  }, [theme, lang]);
+  }, [lang]);
 
-  // Đo width lớn nhất giữa EN/VI rồi KHÓA width bằng --i18n-w
+  // đo width lớn nhất EN/VI để khoá
   useLayoutEffect(() => {
     const measure = () => {
       i18nRefs.current.forEach((el) => {
@@ -21,48 +28,35 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
         const vi = el.querySelector(".lang-vi");
         if (!en || !vi) return;
 
-        // tạm bật để đo chính xác
-        const prevStyleEn = en.getAttribute("style") || "";
-        const prevStyleVi = vi.getAttribute("style") || "";
+        const prevEn = en.getAttribute("style") || "";
+        const prevVi = vi.getAttribute("style") || "";
         en.style.visibility = "visible";
         en.style.opacity = "1";
         vi.style.visibility = "visible";
         vi.style.opacity = "1";
 
-        // lấy width tối đa (dùng scrollWidth/bounding để chắc ăn)
         const w = Math.ceil(
           Math.max(
             en.scrollWidth || en.getBoundingClientRect().width,
             vi.scrollWidth || vi.getBoundingClientRect().width
           )
         );
-
         el.style.setProperty("--i18n-w", `${w}px`);
 
-        // trả lại style cũ (ẩn/hiện sẽ do CSS [data-lang] quyết định)
-        en.setAttribute("style", prevStyleEn);
-        vi.setAttribute("style", prevStyleVi);
+        en.setAttribute("style", prevEn);
+        vi.setAttribute("style", prevVi);
       });
     };
 
     measure();
-    // đo lại khi resize hoặc font load
     window.addEventListener("resize", measure);
     if (document.fonts?.ready) {
       document.fonts.ready.then(measure).catch(() => {});
     }
     return () => window.removeEventListener("resize", measure);
-  // re-measure khi theme đổi vì nút Dark/Light đổi chữ => độ dài khác
-  }, [theme]);
+  }, []);
 
-  // helper gán ref
   const setI18nRef = (el, idx) => (i18nRefs.current[idx] = el);
-
-  function handleNavClick(e, id) {
-    e.preventDefault();
-    const target = document.querySelector(id);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 
   return (
     <header className={styles.header}>
@@ -77,7 +71,11 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
           <div className={styles.navCenter}>
             <ul className={styles.navLinks}>
               <li>
-                <Link className={styles.navLink} href="/">
+                <Link
+                  href="/"
+                  className={`${styles.navLink} ${isActive("/") ? styles.navLinkActive : ""}`}
+                  aria-current={isActive("/") ? "page" : undefined}
+                >
                   <span className="material-symbols-rounded" style={{ fontSize: "1.2em", marginRight: 8 }}>home</span>
                   <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 0)}>
                     <span className="lang-en">Home</span>
@@ -85,8 +83,13 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
                   </span>
                 </Link>
               </li>
+
               <li>
-                <Link className={styles.navLink} href="/staff">
+                <Link
+                  href="/staff"
+                  className={`${styles.navLink} ${isActive("/staff") ? styles.navLinkActive : ""}`}
+                  aria-current={isActive("/staff") ? "page" : undefined}
+                >
                   <span className="material-symbols-rounded" style={{ fontSize: "1.2em", marginRight: 8 }}>groups</span>
                   <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 1)}>
                     <span className="lang-en">Staff</span>
@@ -94,8 +97,13 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
                   </span>
                 </Link>
               </li>
+
               <li>
-                <Link className={styles.navLink} href="/recharge">
+                <Link
+                  href="/recharge"
+                  className={`${styles.navLink} ${isActive("/recharge") ? styles.navLinkActive : ""}`}
+                  aria-current={isActive("/recharge") ? "page" : undefined}
+                >
                   <span className="material-symbols-rounded" style={{ fontSize: "1.2em", marginRight: 8 }}>paid</span>
                   <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 2)}>
                     <span className="lang-en">Recharge</span>
@@ -103,8 +111,13 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
                   </span>
                 </Link>
               </li>
+
               <li>
-                <Link className={styles.navLink} href="/rules">
+                <Link
+                  href="/rules"
+                  className={`${styles.navLink} ${isActive("/rules") ? styles.navLinkActive : ""}`}
+                  aria-current={isActive("/rules") ? "page" : undefined}
+                >
                   <span className="material-symbols-rounded" style={{ fontSize: "1.2em", marginRight: 8 }}>gavel</span>
                   <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 3)}>
                     <span className="lang-en">Rules</span>
@@ -115,27 +128,10 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
             </ul>
           </div>
 
-          {/* Toggles */}
+          {/* Toggles chỉ còn EN/VI + Sakura */}
           <div className={styles.navRight + " " + styles.toggleContainer}>
             <button
-              className={
-                styles.toggleBtn + (theme !== "dark" ? ` ${styles.toggleBtnActive}` : "")
-              }
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <span className="material-symbols-rounded" style={{ fontSize: "1.1em", marginRight: 4 }}>
-                {theme === "dark" ? "dark_mode" : "light_mode"}
-              </span>
-              <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 4)}>
-                <span className="lang-en">{theme === "dark" ? "Dark" : "Light"}</span>
-                <span className="lang-vi">{theme === "dark" ? "Tối" : "Sáng"}</span>
-              </span>
-            </button>
-
-            <button
-              className={
-                styles.toggleBtn + (lang !== "en" ? ` ${styles.toggleBtnActive}` : "")
-              }
+              className={styles.toggleBtn + (lang !== "en" ? ` ${styles.toggleBtnActive}` : "")}
               onClick={() => setLang(lang === "en" ? "vi" : "en")}
             >
               <span className="material-symbols-rounded" style={{ fontSize: "1.1em", marginRight: 4 }}>language</span>
@@ -146,9 +142,7 @@ export default function Header({ theme, setTheme, lang, setLang, sakura, setSaku
             </button>
 
             <button
-              className={
-                styles.toggleBtn + (sakura ? ` ${styles.toggleBtnActive}` : "")
-              }
+              className={styles.toggleBtn + (sakura ? ` ${styles.toggleBtnActive}` : "")}
               onClick={() => setSakura((v) => !v)}
               title="Tắt/Bật hiệu ứng hoa anh đào"
             >

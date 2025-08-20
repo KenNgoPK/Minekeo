@@ -1,50 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded');
 
+/* ===== Shell ===== */
 .header {
   background: linear-gradient(90deg, rgba(255, 241, 248, 0.16) 0%, rgba(255, 182, 217, 0.10) 80%, rgba(255,255,255,0.03) 100%);
-  /* Hiệu ứng mờ sáng bóng bẩy */
   box-shadow: 0 10px 48px 0 rgba(255, 182, 217, 0.22);
   backdrop-filter: blur(12px) saturate(130%);
   border-bottom: 1.8px solid rgba(255,182,217,0.12);
   padding: 0.6rem 0 0.3rem 0;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 0; left: 0; width: 100%;
   z-index: 1000;
   transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1);
-  /* Hiệu ứng sticky */
 }
 
-.navContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-  z-index: 2;
-}
-
+.navContainer { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  min-height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; min-height: 68px; gap: 10px;
 }
 
-.navLeft {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  min-width: 100px;
-}
-
+/* ===== Logo ===== */
+.navLeft { flex: 0 0 auto; display: flex; align-items: center; min-width: 100px; }
 .logo {
-  max-width: 120px;
-  max-height: 56px;
-  width: auto;
-  height: auto;
-  display: block;
+  max-width: 120px; max-height: 56px; width: auto; height: auto; display: block;
   filter: drop-shadow(0 4px 20px #ffb6d988);
   transition: all 0.23s cubic-bezier(.45,0,.2,1);
   cursor: pointer;
@@ -52,67 +30,51 @@
   background: rgba(255,255,255,0.12);
   padding: 0.15rem 0.3rem;
 }
+.logo:hover { transform: scale(1.065) rotate(-2deg); filter: drop-shadow(0 10px 28px #ffb6d988); background: rgba(255,255,255,0.22); }
 
-.logo:hover {
-  transform: scale(1.065) rotate(-2deg);
-  filter: drop-shadow(0 10px 28px #ffb6d988);
-  background: rgba(255,255,255,0.22);
-}
+/* ===== Center Nav ===== */
+.navCenter { flex: 1 1 0%; display: flex; justify-content: center; align-items: center; }
+.navLinks { display: flex; list-style: none; gap: 0.9rem; padding: 0; margin: 0; }
 
-.navCenter {
-  flex: 1 1 0%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navLinks {
-  display: flex;
-  list-style: none;
-  gap: 1.22rem;
-  padding: 0;
-  margin: 0;
-}
-
+/* ===== Links ===== */
 .navLink {
   color: #FF53B2;
   font-family: 'Quicksand', Arial, sans-serif;
-  font-size: 1.17rem;
-  font-weight: 700;
-  letter-spacing: 1.2px;
+  font-size: 1.17rem; font-weight: 700; letter-spacing: 1.2px;
   text-shadow: 0 1px 10px #fff, 0 0 2px #fff;
-  background: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.18);
   padding: 0.43rem 1.15rem 0.39rem 1.15rem;
   border-radius: 14px;
   transition: all 0.3s;
   text-decoration: none;
   position: relative;
-  border: none;
-  outline: none;
-  border-bottom: 2.5px solid transparent;
+  border: 1.2px solid rgba(255,182,217,0.35);
+  border-bottom: 2px solid rgba(255,182,217,0.28);
+  box-shadow: 0 2px 10px rgba(255,182,217,0.18);
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
 }
-
-.navLink:hover,
-.navLinkActive {
-  background: linear-gradient(90deg, #ffb6d9 62%, #ff69b4 100%);
+.navLink:hover {
+  background: linear-gradient(270deg, #ffb6d9 0%, #ff69b4 60%, #ffb6d9 100%);
+  background-size: 200% 200%;
+  animation: navGradientShift 3s ease infinite;
+  transform: translateY(-2px) scale(1.045);
+  box-shadow: 0 10px 22px rgba(255,105,180,0.28);
+  border-color: #ff69b47a;
+}
+.navLinkActive,
+.navLink[aria-current="page"] {
+  background: linear-gradient(90deg, #ff8acb 20%, #ff4fa6 100%);
   color: #fff;
-  box-shadow:
-    0 4px 22px 0 rgba(255, 182, 217, 0.23),
-    0 4px 18px 0 rgba(255, 105, 180, 0.10);
-  transform: translateY(-2px) scale(1.06);
-  text-shadow: 0 4px 18px #fff, 0 0 16px #fff;
-  border-radius: 16px;
-  border-bottom: 2.5px solid #FF69B4;
+  box-shadow: 0 8px 20px rgba(255,105,180,0.3);
+  border-color: #ff69b4;
+  transform: translateY(-1px);
+}
+@keyframes navGradientShift {
+  0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
 }
 
-.navRight,
-.toggleContainer {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 1.05rem;
-}
-
+/* ===== Right Toggles ===== */
+.navRight, .toggleContainer { flex: 0 0 auto; display: flex; align-items: center; gap: 1.05rem; }
 .toggleBtn {
   background: rgba(255,255,255,0.19);
   border: 1.2px solid #ffb6d955;
@@ -123,22 +85,18 @@
   transition: all 0.23s cubic-bezier(.45,0,.2,1);
   font-size: 1.08rem;
   font-family: 'Quicksand', Arial, sans-serif;
-  letter-spacing: 1.2px;
-  font-weight: 700;
+  letter-spacing: 1.2px; font-weight: 700;
   outline: none;
   box-shadow: 0 2px 12px #ffb6d924;
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
 }
-
 .toggleBtn:hover:not(.toggleBtnActive) {
   background: linear-gradient(95deg, #ffb6d9 60%, #fff6f9 100%);
   color: #FF69B4;
-  box-shadow:
-    0 6px 20px 0 rgba(255, 182, 217, 0.20),
-    0 8px 24px 0 rgba(255, 105, 180, 0.09);
-  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 20px 0 rgba(255, 182, 217, 0.20), 0 8px 24px 0 rgba(255, 105, 180, 0.09);
+  transform: translateY(-2px);
   border-color: #ffb6d9;
 }
-
 .toggleBtnActive {
   background: linear-gradient(45deg, #FFB6D9 70%, #FF69B4 110%);
   color: #fff !important;
@@ -146,88 +104,58 @@
   border-color: #FF69B4;
   font-weight: 700;
   text-shadow: 0 1px 10px #fff, 0 0 2px #fff;
+  transform: translateY(-1px);
 }
 
+/* ===== Material icon ===== */
 .material-symbols-rounded {
   font-family: 'Material Symbols Rounded';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1.28em;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-  vertical-align: middle;
-  margin-right: 0.15em;
-  color: inherit;
+  font-weight: normal; font-style: normal;
+  font-size: 1.28em; line-height: 1; letter-spacing: normal;
+  text-transform: none; display: inline-block; white-space: nowrap; direction: ltr;
+  -webkit-font-smoothing: antialiased; vertical-align: middle; margin-right: 0.15em; color: inherit;
 }
 
+/* ===== i18n — phiên bản ổn định (inline-grid) ===== */
+.header .lang-en, .header .lang-vi { display: inline; } /* để đo chính xác */
+
+.i18nWrap{
+  display: inline-grid;                   /* chồng 2 label lên cùng 1 ô */
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center; justify-items: center;
+  width: var(--i18n-w, max-content);      /* khóa width, fallback max-content */
+  white-space: nowrap;
+  min-width: 3ch;                         /* fallback nhỏ khi JS chưa kịp đo */
+}
+
+.i18nWrap > span{
+  grid-area: 1 / 1;
+  transition: opacity .18s ease, visibility .18s ease;
+}
+
+/* Ẩn theo ngôn ngữ nhưng KHÔNG làm lệch layout */
+[data-lang="en"] .i18nWrap .lang-vi { opacity: 0; visibility: hidden; }
+[data-lang="vi"] .i18nWrap .lang-en { opacity: 0; visibility: hidden; }
+
+/* ===== Focus A11y ===== */
+.navLink:focus-visible, .toggleBtn:focus-visible {
+  outline: 2px solid #ff69b4; outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255,105,180,0.2);
+}
+
+/* ===== Motion preference ===== */
+@media (prefers-reduced-motion: reduce) {
+  .navLink, .toggleBtn { transition: none !important; }
+  .navLink:hover { animation: none !important; transform: none !important; }
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 900px) {
-  .navContainer {
-    padding: 0 8px;
-  }
-  .logo {
-    max-width: 80px;
-    max-height: 36px;
-  }
-  .navLinks {
-    gap: 0.55rem;
-  }
-  .toggleBtn {
-    padding: 0.43rem 1rem;
-    font-size: 1rem;
-  }
-  .nav {
-    min-height: 50px;
-  }
-}
-/* ==== giữ style cũ của bạn ở trên, chỉ thêm/đổi phần dưới ==== */
-
-/* Gỡ rule display:none ở global chỉ trong Header
-   -> để cả EN/VI đều render cho việc đo width */
-.header .lang-en,
-.header .lang-vi {
-  display: inline-block !important;
-}
-
-/* Hộp i18n: khóa width bằng biến --i18n-w (do JS set) */
-.i18nWrap {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: var(--i18n-w, auto); /* LOCK width */
-  /* line-height kế thừa từ nút, nên text sẽ căn giữa theo chiều dọc */
-}
-
-/* Hai label chồng lên nhau, chiếm full box */
-.i18nWrap > span {
-  position: absolute;
-  inset: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity .18s ease;
-  pointer-events: none; /* tránh ảnh hưởng click */
-}
-
-/* Ẩn/hiện bằng visibility+opacity để KHÔNG ảnh hưởng layout */
-[data-lang="en"] .i18nWrap .lang-vi { visibility: hidden; opacity: 0; }
-[data-lang="vi"] .i18nWrap .lang-en { visibility: hidden; opacity: 0; }
-
-/* Đảm bảo nút không bẻ dòng, khung không đổi */
-.navLink, .toggleBtn { white-space: nowrap; }
-
-
-/* Dùng để đo chữ ngoài màn hình, không ảnh hưởng layout */
-.i18nMeasureProbe{
-  position: fixed;
-  left: -9999px;
-  top: -9999px;
-  visibility: hidden;
-  white-space: nowrap;
+  .navContainer { padding: 0 8px; }
+  .logo { max-width: 80px; max-height: 36px; }
+  .navLinks { gap: 0.6rem; padding-bottom: 6px; }
+  .nav { min-height: 50px; }
+  .navCenter { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .navLink { padding: 0.4rem 0.9rem; }
 }

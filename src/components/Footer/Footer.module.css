@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+
+/* ===== Footer nền hồng/trắng theo biến global ===== */
+.footer {
+  /* dùng màu trong global.css */
+  background:
+    radial-gradient(900px 240px at 50% -140px, rgba(255, 182, 217, 0.20), transparent 60%),
+    var(--card-bg, #ffffff); /* fallback là trắng nếu thiếu biến */
+  border-top: 1px solid rgba(255, 182, 217, 0.35);
+  position: relative;
+  z-index: 1;
+  color: #5a5a5a; /* text xám đậm để tương phản với nền sáng */
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--border-color, #FFB6D9);
+  box-shadow: 0 6px 14px rgba(255,182,217,0.18);
+}
+
+.copy {
+  color: #474747;
+  font: 700 0.95rem/1 Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: .2px;
+  opacity: .95;
+  white-space: nowrap;
+}
+
+/* ===== Socials (giữ vibe hồng pastel) ===== */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255, 182, 217, 0.45);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+  box-shadow: 0 4px 12px rgba(255, 182, 217, .22);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-secondary, #c56ca9); /* tím hồng nhạt từ global */
+  transition: transform .18s ease, filter .18s ease, fill .18s ease;
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  background: linear-gradient(135deg, rgba(255,182,217,.32), rgba(255,255,255,.95));
+  border-color: var(--pink, #FF69B4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255,105,180,.24), 0 4px 10px rgba(255,182,217,.28);
+}
+.socialLink:hover .icon,
+.socialLink:focus-visible .icon {
+  fill: var(--pink, #FF69B4);
+  transform: scale(1.06);
+}
+
+/* A11y focus ring */
+.socialLink:focus-visible {
+  outline: 2px solid var(--pink, #FF69B4);
+  outline-offset: 2px;
+}
+
+/* ===== Dark theme override (bằng data-theme của body) ===== */
+:global([data-theme="dark"]) .footer {
+  background:
+    radial-gradient(900px 240px at 50% -140px, rgba(255, 182, 217, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(20,20,24,0.92), rgba(16,16,20,0.96));
+  border-top: 1px solid rgba(255, 182, 217, 0.22);
+  color: #eaeaea;
+}
+:global([data-theme="dark"]) .copy { color: #e9e9e9; opacity: .96; }
+:global([data-theme="dark"]) .socialLink {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,182,217,0.28);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+:global([data-theme="dark"]) .icon { fill: #ffd1ea; }
+:global([data-theme="dark"]) .socialLink:hover .icon { fill: #fff; }
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .inner {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  .copy { font-size: 0.9rem; }
+  .socials { gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .logo { width: 30px; height: 30px; }
+  .socialLink { width: 32px; height: 32px; border-radius: 9px; }
+  .icon { width: 17px; height: 17px; }
+}
