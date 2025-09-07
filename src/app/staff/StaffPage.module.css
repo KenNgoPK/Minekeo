@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+
+/* page wrapper */
+.page{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;      /* quan trọng: không center items ngang */
+  background: linear-gradient(180deg, #fff9fb 0%, #fff2f6 100%);
+
+}
+.wrapper{
+  max-width:1200px;
+  margin:0 auto;
+  padding:32px 24px 56px;
+  flex:1;                   /* NEW */
+}
+.main{
+  flex: 1 0 auto;
+  width: 100%;
+}
+.container{
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+}
+
+/* ===== Section ===== */
+.section{
+  background: linear-gradient(180deg, rgba(255,182,217,.08), rgba(255,182,217,.06));
+  border: 1px solid rgba(255,182,217,.25);
+  border-radius: 14px;
+  padding: 18px 18px 24px;
+  margin: 0 0 22px 0;
+}
+
+.sectionTitle{
+  font: 800 1.1rem/1 Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: #7a2a57;
+  letter-spacing:.2px;
+  margin: 0 0 12px 4px;
+  position: relative;
+}
+.sectionTitle::after{
+  content:"";
+  display:block;
+  width: 64px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--pink, #FF69B4);
+  box-shadow: 0 2px 9px rgba(255,105,180,.35);
+  margin-top: 8px;
+}
+
+/* grid of cards */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* ===== Card ===== */
+.card{
+  display:grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg, rgba(255,255,255,.96));
+  border: 2px solid var(--border, rgba(255,182,217,.45));
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 16px rgba(255,182,217,.22);
+  outline: none;
+  transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
+  cursor: pointer;                 /* cursor pointer ở StaffPage */
+}
+.card:hover,
+.card:focus-visible{
+  transform: translateY(-2px);
+  border-color: rgba(255,105,180,.7);
+  box-shadow: 0 10px 24px rgba(255,105,180,.28);
+}
+
+/* avatar + text */
+.avatar{
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid rgba(255,182,217,.6);
+  background: #fff;
+}
+
+.meta{ min-width: 0; }
+.name{
+  font: 800 .95rem/1 Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: #c33f7f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.role{
+  margin-top: 2px;
+  font: 600 .82rem/1 Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--muted, #666);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Modal ===== */
+.modalOverlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  display: grid;
+  place-items: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform:none; } }
+
+.modal{
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 14px;
+  width: 600px;           /* rộng như bạn muốn */
+  max-width: 95%;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+  animation: fadeIn .25s ease;
+  border: 1px solid rgba(255,182,217,.55);
+}
+
+.modalHeader{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px dashed #ffb6d9;
+  padding-bottom: 12px;
+}
+
+.modalAvatar{
+  width: 64px; height: 64px;
+  border-radius: 10px;
+  border: 2px solid #ffb6d9;
+  object-fit: cover;
+  background: #fff;
+}
+
+.modalName{
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #c33f7f;
+}
+.modalRole{
+  margin: 2px 0 0;
+  font-size: .9rem;
+  color: #666;
+}
+
+.modalInfo p{
+  font-size: .92rem;
+  margin: 8px 0;
+  color: #333;
+  display: flex;
+  gap: 8px;
+}
+.modalInfo b{
+  min-width: 110px;      /* canh label thẳng hàng */
+  color: #c33f7f;
+}
+
+.modalActions{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+.modalActionBtn{
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #ffb6d9;
+  background: linear-gradient(90deg,#ffb6d9,#ff69b4);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(255,105,180,.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.modalActionBtn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(255,105,180,.28); }
+
+.modalClose{
+  position: absolute;
+  top: 12px; right: 14px;
+  font-size: 1.5rem;
+  background: #ffe6f1;
+  border: 1px solid #ffb6d9;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 28px; height: 28px;
+  line-height: 24px;
+  color: #c33f7f;
+  font-weight: 700;
+  transition: background .2s ease, transform .15s ease;
+}
+.modalInfo a {
+  color: var(--text-secondary);  /* màu tím-hồng nhạt trong global.css */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s ease, text-decoration .2s ease;
+}
+
+.modalInfo a:hover,
+.modalInfo a:focus-visible {
+  color: var(--accent-color);    /* màu hồng đậm var(--pink) */
+  text-decoration: underline;    /* gạch dưới khi hover */
+}
+
+.modalClose:hover{ background: #ffcce5; transform: scale(1.1); }
+
+/* responsive tweaks */
+@media (max-width: 640px){
+  .grid{ gap: 10px; }
+  .card{ grid-template-columns: 52px 1fr; padding: 10px; }
+  .avatar{ width: 44px; height: 44px; }
+}

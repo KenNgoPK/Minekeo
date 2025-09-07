@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+
+/* ===== Page shell ===== */
+.page{
+  background: linear-gradient(180deg, #fff9fb 0%, #fff2f6 100%);
+  min-height: 100vh;
+  width: 100%;
+}
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 56px;
+}
+
+/* ===== Typography ===== */
+.title{
+  /* tăng kích thước + tracking để headline nổi bật hơn */
+  font: 800 1.8rem/1.25 var(--font-title, 'Quicksand', Arial, sans-serif);
+  letter-spacing: .4px;
+  color: var(--text-primary);
+  margin: 0 0 22px;
+  position: relative;
+}
+.title::after{
+  content:"";
+  display:block;
+  width: 84px; height: 4px;
+  border-radius: 2px;
+  background: var(--pink);
+  margin-top: 10px;
+  box-shadow: 0 2px 14px rgba(255,105,180,.35);
+}
+
+/* ===== List layout (Spacing) ===== */
+.list{
+  display: grid;
+  gap: 18px;               /* tăng khoảng cách giữa các mục */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* mỗi item */
+.item{
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  align-items: stretch;
+  gap: 14px;               /* rộng hơn chút cho thoáng */
+}
+
+/* ===== Badge (#1, #2, …) ===== */
+.badge{
+  background: linear-gradient(160deg, var(--pink) 0%, var(--pink-pastel) 100%);
+  color: #fff;
+  font: 800 1.05rem/1 'Quicksand', Arial, sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:14px;
+  box-shadow: 0 6px 18px rgba(255,105,180,.24);
+  user-select:none;
+  transition: transform .18s ease, box-shadow .22s ease, filter .22s ease;
+}
+.badge:hover{
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(255,105,180,.30);
+  filter: saturate(110%);
+}
+
+/* ===== Card ===== */
+.card{
+  /* nền trong trẻo hơn + border nhẹ để card tách khỏi nền */
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.95));
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(255,182,217,.22);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 18px 18px 22px;
+  transition: transform .16s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+.card:hover{
+  transform: translateY(-2px);
+  border-color: var(--pink);
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(255,105,180,.28);
+}
+
+/* ===== Text in card ===== */
+.meta{ min-width: 0; }
+.linkTitle{
+  /* nhỉnh hơn 1 chút để phân cấp rõ với URL */
+  font: 800 1.06rem/1.3 'Quicksand', Arial, sans-serif;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: .2px;
+}
+.smallLink{
+  /* hiển thị gọn gàng với ellipsis */
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font: 600 .86rem/1.25 'Quicksand', Arial, sans-serif;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color .2s ease, text-decoration .2s ease, opacity .2s ease;
+  opacity: .9;
+}
+.smallLink:hover,
+.smallLink:focus-visible{
+  color: var(--accent-color);
+  text-decoration: underline;
+  opacity: 1;
+  outline: none;
+}
+
+/* ===== CTA button ===== */
+.btnVote{
+  background: linear-gradient(90deg, #ff4fa6 0%, #ff8acb 100%); /* contrast tốt hơn */
+  border: 1px solid rgba(255,105,180,.55);
+  color: #fff;
+  font: 800 .98rem/1 'Quicksand', Arial, sans-serif;
+  padding: 12px 20px;
+  border-radius: 12px;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(255,105,180,.25);
+  transition: transform .12s ease, box-shadow .22s ease, filter .22s ease, opacity .22s ease;
+}
+.btnVote:hover,
+.btnVote:focus-visible{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(255,105,180,.32);
+  filter: saturate(115%);
+  outline: none;
+}
+.btnVote:active{
+  transform: translateY(0) scale(.99);
+}
+
+/* ===== Note ===== */
+.note{
+  margin-top: 18px;
+  color: var(--text-secondary);
+  font: 600 .92rem/1.5 'Quicksand', Arial, sans-serif;
+}
+
+/* ===== A11y small UX ===== */
+.card:focus-within{
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255,105,180,.18), 0 10px 24px rgba(255,105,180,.22);
+}
+.btnVote:focus-visible{
+  box-shadow: 0 0 0 3px rgba(255,105,180,.28);
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce){
+  .badge, .card, .btnVote{ transition: none !important; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 780px){
+  .title{ font-size: 1.6rem; }
+  .item{ grid-template-columns: 72px 1fr; }
+}
+
+@media (max-width: 520px){
+  .title{ font-size: 1.4rem; }
+  .item{ grid-template-columns: 1fr; }
+  .badge{
+    width: 84px; height: 44px;
+    margin: 0 auto;
+  }
+  .card{
+    padding: 14px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .btnVote{ width: 100%; text-align: center; }
+}

@@ -100,7 +100,7 @@ export default function Header({ lang, setLang, sakura, setSakura }) {
 
               <li>
                 <Link
-                  href="/recharge"
+                  href="/vote"
                   className={`${styles.navLink} ${isActive("/recharge") ? styles.navLinkActive : ""}`}
                   aria-current={isActive("/recharge") ? "page" : undefined}
                 >
@@ -114,14 +114,14 @@ export default function Header({ lang, setLang, sakura, setSakura }) {
 
               <li>
                 <Link
-                  href="/rules"
-                  className={`${styles.navLink} ${isActive("/rules") ? styles.navLinkActive : ""}`}
-                  aria-current={isActive("/rules") ? "page" : undefined}
+                  href="/vote"
+                  className={`${styles.navLink} ${isActive("/vote") ? styles.navLinkActive : ""}`}
+                  aria-current={isActive("/vote") ? "page" : undefined}
                 >
                   <span className="material-symbols-rounded" style={{ fontSize: "1.2em", marginRight: 8 }}>gavel</span>
                   <span className={styles.i18nWrap} ref={(el) => setI18nRef(el, 3)}>
-                    <span className="lang-en">Rules</span>
-                    <span className="lang-vi">Quy tắc</span>
+                    <span className="lang-en">Votes</span>
+                    <span className="lang-vi">Votes</span>
                   </span>
                 </Link>
               </li>

@@ -32,13 +32,13 @@ export default function Home() {
 
   return (
     <div>
-      <div className="header-hero-bg min-h-screen relative">
-        <Header
+       <Header
           lang={lang}
           setLang={setLang}
           sakura={sakura}
           setSakura={setSakura}
         />
+      <div className="header-hero-bg min-h-screen relative">
         <HeroSection />
         {sakura && <SakuraEffect enabled={sakura} />}
         <WaveDivider
